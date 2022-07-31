@@ -15,3 +15,6 @@ ASSERT_MSG 源码: https://github.com/TIDC/toy-redis/blob/master/base/checker.hp
 
 ## 目的
 c 语言标准库 <assert.h> 内提供的宏 `assert` 功能非常残疾， 
+
+
+(●'◡'●)
