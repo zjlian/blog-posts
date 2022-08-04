@@ -41,11 +41,11 @@ https://www.bilibili.com/video/BV184411s7qF
 网络编程入门推荐《TCP/IP网络编程》（尹圣雨 著，金国哲 译）这本书，书里分别讲了 Windows 和 Linux 的 Api 用法，只看 Linux 部分就够了。   
 
 ### Design Patterns: Facts and Misconceptions - Klaus Iglberger - CppCon 2021
-思考设计模式在 C++ 的正确实践，Java 派的设计模式并不时适合一比一复刻到 C++ 里。   
+思考设计模式在 C++ 的正确实践，Java 派的设计模式并不适合一比一复刻到 C++ 里。   
 https://www.youtube.com/watch?v=OvO2NR7pXjg
 
 ### Breaking Dependencies: The SOLID Principles - Klaus Iglberger - CppCon 2020
-设计和编写低耦合高内聚代码架构的基本原则。   
+设计低耦合高内聚代码架构的基本原则。   
 https://www.youtube.com/watch?v=Ntraj80qN2k
 
 ### Making the Most Out of Your Compiler - Danila Kutenin - CppCon 2021
