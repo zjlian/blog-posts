@@ -47,30 +47,30 @@ ASSERT_MSG(some_condition)
 这个对象的类我取名为 `AbortOutputStream`，内部就是简单封装一下 `std::cerr`。先看声明：
 ```c++
 class AbortOutputStream
-    {
-    public:
-        /// 接受一个布尔值，表面是否输出日志和结束程序
-        explicit AbortOutputStream(bool work)
-        
-        /// 析构函数内会结束程序
-        ~AbortOutputStream()
+{
+public:
+    /// 接受一个布尔值，表面是否输出日志和结束程序
+    explicit AbortOutputStream(bool work)
+    
+    /// 析构函数内会结束程序
+    ~AbortOutputStream()
 
-        /// 流式风格输出的实现，因为需要
-        template <typename T>
-        AbortOutputStream &operator<<(const T &item)
+    /// 流式风格输出的实现，因为需要
+    template <typename T>
+    AbortOutputStream &operator<<(const T &item)
 
-        /// 额外的输出方式
-        template <typename T, typename... Ts>
-        AbortOutputStream &Print(const T &item, const Ts... items)
+    /// 额外的输出方式
+    template <typename T, typename... Ts>
+    AbortOutputStream &Print(const T &item, const Ts... items)
 
-        /// 额外的输出方式
-        template <typename T>
-        AbortOutputStream &Print(const T &item)
+    /// 额外的输出方式
+    template <typename T>
+    AbortOutputStream &Print(const T &item)
 
-    private:
-        bool work_ = false;
-        size_t output_count_ = 0;
-    };
+private:
+    bool work_ = false;
+    size_t output_count_ = 0;
+};
 ```    
 
 构造函数 `AbortOutputStream(bool work)` 会接受一个布尔值并初始化成员变量 `work_`，这个值非常关键决定了是否会输出日志和结束程序。
