@@ -72,9 +72,9 @@ class AbortOutputStream
         bool work_ = false;
         size_t output_count_ = 0;
     };
-```    
+```
 
-构造函数 `AbortOutputStream(bool work)` 会接受一个布尔值并初始化成员变量 `work_`，这个值非常关键决定了是否会输出日志和结束程序。
+构造函数 `AbortOutputStream(bool work)` 会接受一个布尔值并初始化成员变量 `work_`，这个值非常关键，决定了是否会输出日志和结束程序。   
 ```c++
 explicit AbortOutputStream(bool work)
     : work_(work) {}
