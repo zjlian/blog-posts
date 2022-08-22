@@ -38,35 +38,34 @@ what: XXX 条件的需要满足 XXX，当前的值为 ...
 ASSERT_MSG(some_condition) 
     << "XXX 条件的需要满足 XXX，当前的值为 " << XXX;
 ```
-与普通的断言宏 `assert` 类型，如果条件为真那就啥都不干，条件为假就输出日志并提前结束程序。
+与普通的断言宏 `assert` 类似，如果条件为真那就啥都不干，条件为假就输出日志并提前结束程序。   
+`assert` 宏展开后是一个三元表达式，当条件为真时返回一个无意义的 void 值，条件为假时调用一个返回值为 void 的日志输出函数。
 
-`ASSERT_MSG` 需要特殊处理的是当条件为真时，后续的 operator<< 运算符和日志内容依旧存在，需要确保这些语句能够正确编译，但又不会输出内容到终端上。   
-这一点与 `assert` 有所不同，`assert` 宏展开后是一个三元表达式，当条件为真时返回一个无意义的 void 值，条件为假时调用一个返回值为 void 的日志输出函数。   
-`ASSERT_MSG` 条件为真时如果也是展开成一个无意义的 void 值，那后续的自定义输出语句就会出现语法错误导致无法编译了。
+`ASSERT_MSG` 需要特殊处理的是当条件为真时，后续的 operator<< 运算符和日志内容依旧存在，需要确保这些语句能够正确编译，但又不会输出内容到终端上。这一点与 `assert` 有所不同。    
 
 我的做法是无论条件真假，都返回一个支持 operator<< 运算符的对象，但只有条件为假时才会输出日志，并且在对象析构时结束程序。    
 这个对象的类我取名为 `AbortOutputStream`，内部就是简单封装一下 `std::cerr`。先看声明：
 ```c++
 class AbortOutputStream
-    {
-    public:
-        /// 接受一个布尔值，表面是否输出日志和结束程序
-        explicit AbortOutputStream(bool work)
-        
-        /// 析构函数内会结束程序
-        ~AbortOutputStream()
+{
+public:
+    /// 接受一个布尔值，表面是否输出日志和结束程序
+    explicit AbortOutputStream(bool work)
+    
+    /// 析构函数内会结束程序
+    ~AbortOutputStream()
 
-        /// 流式风格输出的实现，因为需要
-        template <typename T>
-        AbortOutputStream &operator<<(const T &item)
+    /// 流式风格输出的实现，因为需要
+    template <typename T>
+    AbortOutputStream &operator<<(const T &item)
 
-        /// 额外的输出方式
-        template <typename T, typename... Ts>
-        AbortOutputStream &Print(const T &item, const Ts... items)
+    /// 额外的输出方式
+    template <typename T, typename... Ts>
+    AbortOutputStream &Print(const T &item, const Ts... items)
 
-        /// 额外的输出方式
-        template <typename T>
-        AbortOutputStream &Print(const T &item)
+    /// 额外的输出方式
+    template <typename T>
+    AbortOutputStream &Print(const T &item)
 
     private:
         bool work_ = false;
