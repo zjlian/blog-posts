@@ -97,9 +97,10 @@ for (const auto& submap_id_data : data_.submap_data) {
         continue;
     }
     auto task = std::make_unique<common::Task>();
-    task->SetWorkItem([this, &matchers, &created_counter, index, submap_id = submap_id_data.id] {
+    task->SetWorkItem([this, &matchers, &created_counter, index, submap_id = submap_id_data.id, &submaps] {
+        submaps.at(index) = static_cast<const Submap2D*>(data_.submap_data.at(submap_id).submap.get())->grid();
         matchers.at(index) =  std::make_unique<scan_matching::FastCorrelativeScanMatcher2D>(
-            *(static_cast<const Submap2D*>(data_.submap_data.at(submap_id).submap.get())->grid()),
+            *(submaps.at(index)),
             options_.constraint_builder_options().fast_correlative_scan_matcher_options());
         created_counter.DecrementCount();
     });
