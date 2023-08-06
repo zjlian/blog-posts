@@ -41,6 +41,7 @@ git submodule add git@github.com:zjlian/blog-posts.git source/_posts
 这部分比较灵活，想怎么用就怎么用，这里简单列两种用法。   
 （一）单独 clone 文章仓库下来写，这种用法需要自己手动编写 hexo 博客的 [Front-matter](https://hexo.io/zh-cn/docs/front-matter) 信息，文章写完了，先提交文章仓库，然后到 hexo 仓库内用命令更新同步子模块，把最新的文章都下载下来。
 ```bash
+git submodule init
 git submodule update --remote --merge
 ``` 
 更新完后再敲一下部署命令 `hexo deploy` 就可以了。   
