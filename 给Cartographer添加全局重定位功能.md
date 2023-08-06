@@ -85,14 +85,14 @@ const sensor::PointCloud filtered_point_cloud = sensor::VoxelFilter(0.05).Filter
 接着是为每一幅 Submap 创建匹配器，这一步需要在线程池里加速执行。
 ```C++
 int32_t submap_size = static_cast<int>(data_.submap_data.size());
+absl::BlockingCounter created_counter{submap_size};
 std::vector<std::shared_ptr<scan_matching::FastCorrelativeScanMatcher2D>> matchers;
+std::vector<const cartographer::mapping::Grid2D*> submaps;
 matchers.resize(submap_size);
-// 用于阻塞等待 N 幅 Submap 的匹配器创建完成
-absl::BlockingCounter created_counter{submap_size};   
+submaps.resize(submap_size);
 
 size_t index = 0;
 for (const auto& submap_id_data : data_.submap_data) {
-    // 只匹配从 pbstream 里加载的 Submap
     if (submap_id_data.id.trajectory_id != 0) {
         continue;
     }
