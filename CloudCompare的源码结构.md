@@ -75,7 +75,7 @@ CC_CORE 被作为独立代码库脱离了 CloudCompare 仓库，它的项目地�
 UI 拓展就是 QT 信号槽那一套，先打开 `qCC/ui_templates` 目录，找到想要修改的 ui 文件，然后再实现一下对应的槽函数就可以了。
 
 ### 插件扩展
-插件拓展除了不能修改 CloudCompare 本身的 UI 意外，可以拓展任意想要的功能，CloudCompare 提供了三种基本类型的插件抽象，分别是 IO 插件、GL 插件和标准插件。
+插件拓展除了不能修改 CloudCompare 本身的 UI 以外，可以拓展任意想要的功能，CloudCompare 提供了三种基本类型的插件抽象，分别是 IO 插件、GL 插件和标准插件。
 
 IO 插件是对 QCC_IO 模块的拓展，实现自定义文件的加载和保存。
 
