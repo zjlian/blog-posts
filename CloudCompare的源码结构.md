@@ -16,7 +16,7 @@ CloudCompare 是一个开源的大规模点云处理软件，内置了点云渲�
 ## 编译和依赖
 编译的文档在项目目录下的 BUILD.md 文件里。
 
-CloudCompare 本体只依赖 Qt。在 CMake 中可以选择使用某些依赖来开启特定功能，例如使用 OpenMP 或 TBB 库实现并行计算，支持 raster/DXF/SHP 等格式的文件加载和保存。
+CloudCompare 本体只依赖 Qt。在 CMake 中可以选择使用某些依赖来开启特定功能，例如使用 OpenMP 或 TBB 库实现并行计算，支持raster/DXF/SHP等的摆放格式的文件加载和保存。
 
 CloudCompare 支持插件化拓展，同样可用在 CMake 中选择开启特定插件的编译，源码中已经内置类很多插件，每一个插件都可能会有自己的依赖，开启后需要提供这些依赖。
 
